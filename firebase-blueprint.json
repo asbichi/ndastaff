@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Student record in the school database",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "admissionNo": { "type": "string" },
+        "class": { "type": "string" },
+        "arm": { "type": "string" },
+        "gender": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["name", "admissionNo", "class", "arm", "gender"]
+    },
+    "Question": {
+      "title": "Question",
+      "description": "CBT Question in the databank",
+      "type": "object",
+      "properties": {
+        "subject": { "type": "string" },
+        "class": { "type": "string" },
+        "text": { "type": "string" },
+        "options": {
+          "type": "object",
+          "properties": {
+            "A": { "type": "string" },
+            "B": { "type": "string" },
+            "C": { "type": "string" },
+            "D": { "type": "string" }
+          }
+        },
+        "correctAnswer": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["subject", "class", "text", "options", "correctAnswer"]
+    },
+    "Score": {
+      "title": "Score",
+      "description": "Student score for a specific subject and term",
+      "type": "object",
+      "properties": {
+        "ca": { "type": "string" },
+        "exam": { "type": "string" }
+      }
+    },
+    "CBTResult": {
+      "title": "CBTResult",
+      "description": "Student CBT Exam Result",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "class": { "type": "string" },
+        "score": { "type": "number" },
+        "total": { "type": "number" },
+        "percentage": { "type": "number" },
+        "date": { "type": "timestamp" }
+      },
+      "required": ["studentId", "studentName", "class", "score", "total", "percentage"]
+    },
+    "GalleryMember": {
+      "title": "GalleryMember",
+      "description": "School Management or PTA EXCO Gallery Member Profile",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "role": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["name", "title", "role", "imageUrl", "description", "order"]
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "School staff member or teacher profile",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "staffId": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string" },
+        "department": { "type": "string" },
+        "qualification": { "type": "string" },
+        "gender": { "type": "string" },
+        "status": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["name", "staffId", "role"]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Students collection"
+    },
+    "/staff/{staffId}": {
+      "schema": { "$ref": "#/entities/Staff" },
+      "description": "Staff members and teachers collection"
+    },
+    "/staffs/{staffId}": {
+      "schema": { "$ref": "#/entities/Staff" },
+      "description": "Staff members collection alias"
+    },
+    "/questions/{questionId}": {
+      "schema": { "$ref": "#/entities/Question" },
+      "description": "Questions databank"
+    },
+    "/scores/{scoreId}": {
+      "schema": { "$ref": "#/entities/Score" },
+      "description": "Termly scores per student and subject"
+    },
+    "/cbt_results/{resultId}": {
+      "schema": { "$ref": "#/entities/CBTResult" },
+      "description": "Results from CBT exams"
+    },
+    "/gallery_members/{memberId}": {
+      "schema": { "$ref": "#/entities/GalleryMember" },
+      "description": "Gallery members collection"
+    }
+  }
+}
